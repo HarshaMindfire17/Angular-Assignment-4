@@ -7,9 +7,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { RatingComponent } from './rating/rating.component';
 import { HttpClientModule } from '@angular/common/http'
 import { DataService } from './data.service';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -22,9 +19,6 @@ import { MaterialModule } from './material/material.module';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FlexLayoutModule,
-    BrowserAnimationsModule,
-    MaterialModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

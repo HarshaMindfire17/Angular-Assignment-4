@@ -1,0 +1,19 @@
+<form [formGroup]="signupForm2">
+    <div class="form-group">
+        <label for="rating">Self-rating <span class="help-block">*</span></label>
+        <mat-form-field appearance="outline" style="width:360px"> 
+            <mat-select
+                id="rating"
+                name="rating"
+                formControlName="rating"
+                class="form-control"
+                (change)=sendData()>
+                <mat-option *ngFor="let item of ratings" value={{item}}>
+                    {{item}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="(signupForm2.get('rating').hasError('required') && signupForm2.get('rating').touched) || (!check2)" class="help-block">Please give a rating!</mat-error>
+
+        </mat-form-field>
+    </div>
+</form>

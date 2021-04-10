@@ -1,0 +1,74 @@
+:host 
+{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.form-group{
+  margin:15px;
+}
+.container 
+{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.first
+{
+  font-size: large;
+}
+
+.second
+{
+  background-color: bisque;
+  border-radius: 10px;
+  margin:auto;
+  padding: 30px;
+}
+
+.row
+{
+  margin-bottom: 1.6%;
+}
+
+label
+{
+  font-size: 20px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.help-block
+{
+  color:red;
+}
+
+.imgDiv div
+{
+  margin-bottom: 3px;
+  color: red;
+}
+
+.iblock
+{
+  display: inline-block;
+}
+
+.copied *
+{
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+.setRadio
+{
+  font-size: 17px;
+  display: inline;
+  margin: 10px;
+}
+
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.6em 0px !important;}

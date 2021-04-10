@@ -1,0 +1,36 @@
+<mat-card class="container" [style.margin-left.px]="15" [style.margin-right.px]="15">
+  <mat-card-title>Employee-{{user.id}}</mat-card-title>
+  <mat-card-content>
+    <div fxLayoutAlign="space-between" fxFlex="100" fxFlex.xs="100" fxLayout="column">
+      <div class="row"  fxLayoutAlign="start" fxFlex="100" fxFlex.xs="100" fxLayout="row" fxFlexFill>
+          <div class="lab" fxFlex="20">Name:</div>
+          <div fxFlex="80">
+            {{user.fname+" "+user.lname}}
+          </div>
+      </div>
+      <div class="row" fxLayoutAlign="start" fxFlex="100" fxFlex.xs="100" fxLayout="row" fxFlexFill>
+        <div class="lab" fxFlex="20">Email:</div>
+        <div fxFlex="80">
+          {{user.email}}
+        </div>
+      </div>
+
+      <div class="row" fxLayoutAlign="start" fxFlex="100" fxFlex.xs="100" fxLayout="row" fxFlexFill>
+        <div class="lab" fxFlex="20">Phone:</div>
+        <div fxFlex="80">
+          {{user.phone}}
+        </div>
+      </div>
+
+      <div class="row" fxLayoutAlign="start" fxFlex="100" fxFlex.xs="100" fxLayout="row" fxFlexFill>
+        <div class="lab" fxFlex="20">Rating:</div>
+        <div fxFlex="80">
+          {{user.rating}} star
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end" ><!--rgb(201, 29, 201)-->
+    <button mat-raised-button (click)="gimme(user)" >Edit</button>
+  </mat-card-actions>
+</mat-card>

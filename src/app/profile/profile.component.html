@@ -1,0 +1,156 @@
+<div class="container">
+  
+  <div class="alert alert-info alert-dismissible" *ngIf="submitted" role="alert">
+    {{user.fname}} {{user.lname}} rated {{user.rating}} star!
+    <button type="button" class="close" data-dismiss="alert" (click)="alertClose()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+ 
+  <div class="first" style="display: inline-block;" ><b>Student:</b>&nbsp;
+    <span>{{signupForm.value.userData.fname}}</span>&nbsp;
+    <span>{{signupForm.value.userData.lname}}</span>
+  </div>
+  <div class="first" style="float: right;"><b>Rating:</b>&nbsp;
+    <span><b>{{showRating}}</b></span><i class="fa fa-star" [ngStyle]="{color:colour}"></i>
+  </div>
+
+  <div class="second">
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div formGroupName="userData">
+          <div class="form-group ">
+            <label for="username">Username <span class="help-block">*</span></label>
+            <mat-form-field appearance="outline" class="iblock">
+              <input
+                matInput
+                type="text"
+                id="fname"
+                placeholder="First name"
+                formControlName="fname">
+                <mat-error *ngIf="(signupForm.get('userData.fname').hasError('nameIsForbidden') && (signupForm.get('userData.fname').touched)) || 
+                (signupForm.get('userData.lname').hasError('nameIsForbidden') && signupForm.get('userData.lname').touched)" >This name is invalid!</mat-error>
+                <mat-error *ngIf="(signupForm.get('userData.fname').hasError('required')||signupForm.get('userData.lname').hasError('required'))
+                && (signupForm.get('userData.fname').touched||signupForm.get('userData.lname').touched)" >This field is required!</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="iblock">
+              <input
+                matInput
+                type="text"
+                id="lname"
+                placeholder="Last name"
+                formControlName="lname">
+                <mat-error *ngIf="(signupForm.get('userData.fname').hasError('nameIsForbidden') && (signupForm.get('userData.fname').touched)) || 
+                (signupForm.get('userData.lname').hasError('nameIsForbidden') && signupForm.get('userData.lname').touched)" >This name is invalid!</mat-error>
+                <mat-error *ngIf="(signupForm.get('userData.fname').hasError('required')||signupForm.get('userData.lname').hasError('required'))
+                && (signupForm.get('userData.fname').touched||signupForm.get('userData.lname').touched)" >This field is required!</mat-error>
+            </mat-form-field>
+          </div>
+      
+          <div class="form-group">
+            <label for="email">Email  <span class="help-block">*</span></label>
+            <mat-form-field appearance="outline" style="width:360px">
+              <input
+              matInput
+              type="text"
+              id="email"
+              formControlName="email"
+              placeholder="someone@example.com">
+          
+              <mat-error *ngIf="!signupForm.get('userData.email').valid && signupForm.get('userData.email').touched"
+                class="help-block">Please enter a valid email!</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <label for="dob">Date of Birth  <span class="help-block">*</span></label>
+            <mat-form-field appearance="outline" color="accent" style="width:360px" >
+                <input id="dob" formControlName="dob" matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="(signupForm.get('userData.dob').hasError('invalidDate'))" class="help-block">Please enter a valid date</mat-error>
+                <mat-error *ngIf="(signupForm.get('userData.dob').hasError('required') && signupForm.get('userData.dob').touched) " class="help-block">Please enter a Date of Birth</mat-error>
+            </mat-form-field>  
+        </div>
+
+          <div class="form-group" style="margin: 10px 10px 20px;">
+            <label for="gender">Gender</label>
+            <mat-radio-group style="margin:23px;" color="warn" formControlName="gender">
+              <div class="setRadio" *ngFor="let gender of genders">
+                <mat-radio-button [value]="gender">{{ gender }}</mat-radio-button>
+              </div>
+            </mat-radio-group>
+          </div>
+        
+          <div class="form-group">
+            <label for="phone">Phone Number <span class="help-block">*</span></label>
+            <mat-form-field appearance="outline" style="width:360px" > 
+              <input
+              matInput
+              type="text"
+              id="phone"
+              formControlName="phone">
+              <mat-error *ngIf="signupForm.get('userData.phone').hasError('required') && signupForm.get('userData.phone').touched" class="help-block">Please enter phone number!</mat-error>
+              <mat-error *ngIf="signupForm.get('userData.phone').hasError('invalidPhone') && signupForm.get('userData.phone').touched" class="help-block">Invalid phone number!</mat-error>
+            </mat-form-field>
+          </div>
+        
+          <div class="form-group">
+            <label for="phone2">Alternate Phone Number</label>
+            <mat-form-field appearance="outline" style="width:360px"> 
+              <input
+              matInput
+              type="text"
+              id="phone2"
+              formControlName="phone2">
+              <mat-error *ngIf="signupForm.get('userData.phone2').hasError('invalidPhone') && signupForm.get('userData.phone2').touched" class="help-block">Invalid phone number!</mat-error>
+            </mat-form-field>   
+          </div>
+
+          <div class="form-group">
+            <label for="city">City</label>
+            <mat-form-field appearance="outline" style="width:360px" > 
+              <input
+              type="text"
+              matInput
+              id="city"
+              formControlName="city">
+            </mat-form-field>
+          </div>
+        
+          <div class="form-group">
+            <label for="state">State <span class="help-block">*</span></label>
+              <mat-form-field appearance="outline" style="width:360px" > 
+                <mat-select id="state" name="state" formControlName="state">
+                  <mat-option value="">--Select one--</mat-option>
+                  <mat-option *ngFor="let item of states" value={{item}}>
+                    {{item}}
+                  </mat-option>
+                </mat-select>
+              <mat-error *ngIf="signupForm.get('userData.state').hasError('required') && signupForm.get('userData.state').touched" class="help-block">Please select a state!</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <label for="country">Country <span class="help-block">*</span></label>
+            <mat-form-field appearance="outline" style="width:360px"> 
+              <mat-select id="country" name="country" formControlName="country" (selectionChange)="openStates()">
+                <mat-option value="">--Select one--</mat-option><mat-option value="India">India</mat-option>
+                <mat-option value="USA">U.S.A</mat-option><mat-option value="UK">U.K</mat-option>
+                <mat-option value="Japan">Japan</mat-option><mat-option value="France">France</mat-option><mat-option value="Russia">Russia</mat-option>
+              </mat-select>
+              <mat-error *ngIf="signupForm.get('userData.country').hasError('required') && signupForm.get('userData.country').touched" class="help-block">Please select a country!</mat-error>
+            </mat-form-field>
+          </div>
+        
+          <app-rating (sentRating)="receivedRating($event)"></app-rating>
+      
+        <div id="clickable">
+          <button mat-raised-button color="warn" type="submit" style="padding:0px 20px" >Submit</button>
+        </div>
+      </div>
+    </form>
+
+    <span *ngIf="signupForm.invalid && signupForm.touched" class="help-block">Please enter valid data!</span>
+  </div>
+</div>
