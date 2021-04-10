@@ -7,12 +7,13 @@
                 name="rating"
                 formControlName="rating"
                 class="form-control"
-                (change)=sendData()>
+                (selectionChange)=sendData()>
+                <mat-option value=""> --Select one--</mat-option>
                 <mat-option *ngFor="let item of ratings" value={{item}}>
                     {{item}}
                 </mat-option>
             </mat-select>
-            <mat-error *ngIf="(signupForm2.get('rating').hasError('required') && signupForm2.get('rating').touched) || (!check2)" class="help-block">Please give a rating!</mat-error>
+            <mat-error *ngIf="signupForm2.get('rating').hasError('required') && signupForm2.get('rating').touched" class="help-block">Please give a rating!</mat-error>
 
         </mat-form-field>
     </div>

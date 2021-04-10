@@ -31,22 +31,23 @@ export class RatingComponent implements OnInit {
 
     this.dataService.check2.subscribe((data)=>{
       this.check2=data;
+    
       if(this.check2==5)
       {
+        this.signupForm2.reset();
         this.signupForm2.patchValue({
           'rating':'',
         })
-        this.signupForm2.reset();
+        
         this.dataService.checkValue(3);
       }
       else if(this.check2==0){
         this.signupForm2.get('rating').markAsTouched()
-
       }
-      });
+    });
     
     this.signupForm2=new FormGroup({
-        'rating': new FormControl(null, Validators.required),
+        'rating': new FormControl('', Validators.required),
     })
   }
   

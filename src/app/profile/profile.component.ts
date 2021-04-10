@@ -3,7 +3,7 @@ import { FormGroup} from '@angular/forms';
 import { ShareService } from '../share.service';
 import { DataService } from '../data.service';
 import { HttpClient} from '@angular/common/http';
-
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar'
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -36,7 +36,8 @@ export class ProfileComponent implements OnInit {
     country:'', 
     rating:'',
   };
-  constructor(private shareService: ShareService, private http: HttpClient, private dataService: DataService) {}
+  constructor(private shareService: ShareService, private http: HttpClient, 
+    private dataService: DataService, private snackBar: MatSnackBar) {}
 
   ngOnInit() 
   {   
@@ -96,7 +97,8 @@ export class ProfileComponent implements OnInit {
 
   onSubmit() {
     this.signupForm.markAllAsTouched();
-    if(this.showRating=="")
+    
+    if(!this.showRating)
     {
       this.dataService.checkValue(0);
     }
@@ -128,16 +130,15 @@ export class ProfileComponent implements OnInit {
         )
         location.reload();
       }
-     
-      this.submitted=true;
-      this.signupForm.reset();
+      this.states=[];
+        
+      
+      this.openSnackBar(this.user.fname+" "+this.user.lname+" rated "+this.user.rating+" star!", "Dismiss");
       this.dataService.checkValue(5);
-
       setTimeout(()=>{
+        this.signupForm.reset();
         this.showRating='';
         this.colour="silver";
-        this.states=[];
-        this.submitted=false;
         this.signupForm.patchValue({
           'userData': {
             'state':'',
@@ -147,10 +148,13 @@ export class ProfileComponent implements OnInit {
       },2500);
     }
   }
-  
-  alertClose(){
-    this.submitted=false;
+  openSnackBar(message,action)
+  {
+    this.snackBar.open(message,action, {
+      duration: 2000,
+    });
   }
+  
 
   openStates(){
     var selected=this.signupForm.value.userData.country;

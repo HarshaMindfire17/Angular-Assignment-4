@@ -23,7 +23,7 @@
 
 .second
 {
-  background-color: bisque;
+  background-color: cornsilk;
   border-radius: 10px;
   margin:auto;
   padding: 30px;
@@ -41,22 +41,13 @@ label
   margin-bottom: 5px;
 }
 
-.help-block
-{
-  color:red;
-}
-
-.imgDiv div
-{
-  margin-bottom: 3px;
-  color: red;
-}
-
 .iblock
 {
   display: inline-block;
 }
-
+span{
+  color: red;
+}
 .copied *
 {
   display: inline-block;

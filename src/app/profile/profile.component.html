@@ -1,12 +1,4 @@
-<div class="container">
-  
-  <div class="alert alert-info alert-dismissible" *ngIf="submitted" role="alert">
-    {{user.fname}} {{user.lname}} rated {{user.rating}} star!
-    <button type="button" class="close" data-dismiss="alert" (click)="alertClose()" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
- 
+<div class="container">  
   <div class="first" style="display: inline-block;" ><b>Student:</b>&nbsp;
     <span>{{signupForm.value.userData.fname}}</span>&nbsp;
     <span>{{signupForm.value.userData.lname}}</span>
@@ -16,7 +8,7 @@
   </div>
 
   <div class="second">
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="signupForm" ><!--(ngSubmit)="onSubmit()"-->
       <div formGroupName="userData">
           <div class="form-group ">
             <label for="username">Username <span class="help-block">*</span></label>
@@ -38,6 +30,7 @@
                 matInput
                 type="text"
                 id="lname"
+
                 placeholder="Last name"
                 formControlName="lname">
                 <mat-error *ngIf="(signupForm.get('userData.fname').hasError('nameIsForbidden') && (signupForm.get('userData.fname').touched)) || 
@@ -75,7 +68,7 @@
 
           <div class="form-group" style="margin: 10px 10px 20px;">
             <label for="gender">Gender</label>
-            <mat-radio-group style="margin:23px;" color="warn" formControlName="gender">
+            <mat-radio-group style="margin:23px;" color="accent" formControlName="gender">
               <div class="setRadio" *ngFor="let gender of genders">
                 <mat-radio-button [value]="gender">{{ gender }}</mat-radio-button>
               </div>
@@ -146,11 +139,9 @@
           <app-rating (sentRating)="receivedRating($event)"></app-rating>
       
         <div id="clickable">
-          <button mat-raised-button color="warn" type="submit" style="padding:0px 20px" >Submit</button>
+          <button mat-raised-button color="warn" type="button" (click)="onSubmit()" style="padding:0px 20px" >Submit</button>
         </div>
       </div>
     </form>
-
-    <span *ngIf="signupForm.invalid && signupForm.touched" class="help-block">Please enter valid data!</span>
   </div>
 </div>
