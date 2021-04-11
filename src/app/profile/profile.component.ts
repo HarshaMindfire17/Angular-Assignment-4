@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import { FormGroup} from '@angular/forms';
 import { ShareService } from '../share.service';
 import { DataService } from '../data.service';
@@ -11,7 +11,7 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar'
   providers:[]
 })
 
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit,OnDestroy {
 
   genders = ['Male', 'Female','Other'];
   signupForm: FormGroup;
@@ -86,7 +86,11 @@ export class ProfileComponent implements OnInit {
         'country':'',}
       });
   }
-
+  ngOnDestroy()
+  {
+    this.dataService.appData.unsubscribe();
+    this.dataService.check2.unsubscribe();
+  }
   receivedRating(event)
   {
     if(this.check2!=2)

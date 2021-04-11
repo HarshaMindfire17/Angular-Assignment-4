@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../data.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { DataService } from '../data.service';
   providers:[]
 })
 
-export class RatingComponent implements OnInit {
+export class RatingComponent implements OnInit,OnDestroy {
 
   constructor(private dataService:DataService) {}
 
@@ -49,6 +49,11 @@ export class RatingComponent implements OnInit {
     this.signupForm2=new FormGroup({
         'rating': new FormControl('', Validators.required),
     })
+  }
+
+  ngOnDestroy(){
+    this.dataService.appData.unsubscribe();
+    this.dataService.check2.unsubscribe();
   }
   
   sendData(){
